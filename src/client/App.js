@@ -1,23 +1,44 @@
-import React, { Component } from 'react';
-import './app.css';
-import ReactImage from './react.png';
+import React, { useEffect, useState } from 'react';
+import './index.css';
+import InputHeader from './components/InputHeader';
+import TableComponent from './components/TableComponent';
+import axios from 'axios';
 
-export default class App extends Component {
-  state = { username: null };
+export default function App() {
+  const [allURLData, setallURLData] = useState([])
+  const shortenURL = (url, canLogHits, expiryDate) => {
+    axios({
+      url: "/api/shorturl",
+      method: "post",
+      data: {
+        longUrl: url,
+        isLoggingEnabled: canLogHits,
+        expiryDate: expiryDate
+      }
+    }).then( (response) => {
 
-  componentDidMount() {
-    fetch('/api/getUsername')
-      .then(res => res.json())
-      .then(user => this.setState({ username: user.username }));
+      console.log(response.data);
+    }).catch( (error) => {
+      console.error(error);
+    })
   }
 
-  render() {
-    const { username } = this.state;
-    return (
-      <div>
-        {username ? <h1>{`Hello ${username}`}</h1> : <h1>Loading.. please wait!</h1>}
-        <img src={ReactImage} alt="react" />
+  useEffect(() => {
+    axios({
+      url: "/api/getAllUrls",
+      method: "GET",
+    }).then( (response) => {
+      setallURLData(response.data);
+      console.log(response.data);
+    })
+  }, [])
+  console.log(allURLData);
+  return (
+    <React.StrictMode>
+      <div className="grid">
+        <InputHeader addURL={shortenURL} />
+        {allURLData.length > 0 ? <TableComponent tableData={allURLData} /> : ""}
       </div>
-    );
-  }
+    </React.StrictMode>
+  );
 }

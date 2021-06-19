@@ -1,0 +1,10 @@
+{
+  "development": {
+    "mongoURI": "mongodb+srv://shaun:shaun@cluster0.nm0nh.mongodb.net/urlshortner?retryWrites=true&w=majority",
+    "baseURL": "http://localhost:8080/api"
+  },
+  "production": {
+    "mongoURI": "mongodb+srv://shaun:shaun@cluster0.nm0nh.mongodb.net/urlshortner?retryWrites=true&w=majority",
+    "baseURL": "http://localhost:8080/api"
+  }
+}
