@@ -5,11 +5,9 @@ const validateAndRedirectURL = async (req, res) => {
     const shortUrlID = req.params.shortUrl;
     
     const url = await Url.findOne({ urlID: shortUrlID });
-    console.log(url);
     try {
         if (url) {
             await updateValuesInDB(url, req);
-            console.log(getDifferenceBetweenDates(new Date(), url.expiryDate));
             const isURLExpired = getDifferenceBetweenDates(new Date(), url.expiryDate) > 0 ? false : true;
             !isURLExpired ? res.redirect(url.fullURL) : res.status(500).json(statuses.URL_EXPIRED);
         } else {
