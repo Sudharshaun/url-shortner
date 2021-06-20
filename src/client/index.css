@@ -6,10 +6,7 @@ body{
   font-family: 'Poppins', sans-serif;
 }
 .container {
-  top: 37%;
-  position: absolute;
-  left: 5%;
-  right: 5%;
+  margin: 100px;
 }
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: #748194;

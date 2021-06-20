@@ -5,19 +5,21 @@ import TableComponent from './components/TableComponent';
 import axios from 'axios';
 
 export default function App() {
-  const [allURLData, setallURLData] = useState([])
-  const shortenURL = (url, canLogHits, expiryDate) => {
+  const [allURLData, setallURLData] = useState([]);
+  const shortenURL = (url, canLogHits, expiryDate, isExpiryDateGiven) => {
     axios({
       url: "/api/shorturl",
       method: "post",
       data: {
         longUrl: url,
         isLoggingEnabled: canLogHits,
-        expiryDate: expiryDate
+        expiryDate: expiryDate,
+        isExpiryDateGiven: isExpiryDateGiven,
       }
     }).then( (response) => {
-
-      console.log(response.data);
+      const presentData = allURLData;
+      presentData.push(response.data);
+      setallURLData(presentData);
     }).catch( (error) => {
       console.error(error);
     })
@@ -29,10 +31,9 @@ export default function App() {
       method: "GET",
     }).then( (response) => {
       setallURLData(response.data);
-      console.log(response.data);
-    })
-  }, [])
-  console.log(allURLData);
+    });
+  }, []);
+
   return (
     <React.StrictMode>
       <div className="container">

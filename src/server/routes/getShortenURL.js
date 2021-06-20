@@ -1,24 +1,7 @@
 const Url = require('../models/urls');
 const statuses = require('../responseStatuses');
 
-const getDifferenceBetweenDates = (date1, date2) => {
-    const diffTime = Math.abs(date2 - date1);
-    return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
- }
-
-const updateValuesInDB = async (url, req) => {
-    let hitsCount = url.hitsCount;
-    hitsCount++;
-    const existingIPAddress = url.userIdentity;
-    const userIdentityObj = {
-        ip: req.headers['x-forwarded-for'] || req.socket.remoteAddress,
-        userAgent: req.get('User-Agent'),
-    };
-    existingIPAddress.push(userIdentityObj);
-    await url.update({ hitsCount: hitsCount, userIdentity: existingIPAddress });
-}
-
-const getShortenedUrl = async (req, res) => {
+const validateAndRedirectURL = async (req, res) => {
     const shortUrlID = req.params.shortUrl;
     
     const url = await Url.findOne({ urlID: shortUrlID });
@@ -38,4 +21,20 @@ const getShortenedUrl = async (req, res) => {
     }
 }
 
-module.exports = getShortenedUrl;
+const getDifferenceBetweenDates = (date1, date2) => {
+    const diffTime = Math.abs(date2 - date1);
+    return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+ }
+
+const updateValuesInDB = async (url, req) => {
+    let hitsCount = url.hitsCount;
+    hitsCount++;
+    const existingIPAddress = url.userIdentity;
+    const userIdentityObj = {
+        ip: req.headers['x-forwarded-for'] || req.socket.remoteAddress,
+        userAgent: req.get('User-Agent'),
+    };
+    existingIPAddress.push(userIdentityObj);
+    await url.update({ hitsCount: hitsCount, userIdentity: existingIPAddress });
+}
+module.exports = validateAndRedirectURL;

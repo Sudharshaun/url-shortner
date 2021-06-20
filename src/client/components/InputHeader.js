@@ -1,13 +1,14 @@
 import '../index.css';
 import React, { useState } from 'react';
+import { addOneYeartoCurrentDate } from '../utils/utils';
 export default function InputHeader(props) {
     const [urlString, setUrlString] = useState("");
     const [isHitCountEnabled, setisHitCountEnabled] = useState(false);
-    const [expiryDate, setexpiryDate] = useState(new Date());
+    const [expiryDate, setexpiryDate] = useState("");
     const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log(urlString, isHitCountEnabled, expiryDate);
-        props.addURL(urlString, isHitCountEnabled, expiryDate);
+        const expiryDateServed = expiryDate == "" ? addOneYeartoCurrentDate() : expiryDate;
+        const isExpiryDateGiven = expiryDate == "" ? false : true;
+        props.addURL(urlString, isHitCountEnabled, expiryDateServed, isExpiryDateGiven);
         setUrlString("");
         setisHitCountEnabled(false);
         setexpiryDate(new Date());

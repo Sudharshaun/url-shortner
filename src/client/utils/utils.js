@@ -16,4 +16,12 @@ const getDifferenceBetweenDates = (date1, date2) => {
    const diffTime = Math.abs(date2 - date1);
    return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 }
-export {formatDateUtil, getDifferenceBetweenDates};
+const addOneYeartoCurrentDate = () => {
+   const date = new Date();
+   const year = date.getFullYear();
+   const month = date.getMonth();
+   const day = date.getDate();
+   return new Date(year + 1, month, day);
+}
+
+export {formatDateUtil, getDifferenceBetweenDates, addOneYeartoCurrentDate};

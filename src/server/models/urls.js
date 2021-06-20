@@ -14,6 +14,9 @@ const shortUrlSchema = new mongoose.Schema({
 		required: true,
 		default: shortId.generate
 	},
+	isExpiryDateGiven: {
+		type: Boolean,
+	},
 	expiryDate: {
 		type: Date,
 		required: false,

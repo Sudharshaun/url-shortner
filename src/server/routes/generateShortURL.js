@@ -12,7 +12,7 @@ const baseUrl = `http://localhost:8080/api`;
  * Checks if the URL is already available else saves the data and returns the data to render.
  */
 
-const shortUrlRoute = async (req, res) => {
+const generateShortURLRoute = async (req, res) => {
     const fullURL = req.body.longUrl;
     if(!validUrl.isUri(baseUrl)){
         return res.status(401).json(statuses.INTERNAL_ERROR);
@@ -55,7 +55,8 @@ const getUserAddressArray = (req) => {
 
 const saveURLDataInDB = async (req, fullURL) => {
     const isLoggingEnabled = req.body.isLoggingEnabled;
-    const expiryDate = req.body.expiryDate;
+    let expiryDate = req.body.expiryDate;
+    const isExpiryDateGiven = req.body.isExpiryDateGiven;
     const urlID = shortID.generate();
     const shortenedURL = baseUrl + "/" + urlID;
     const userIPAddressArr = getUserAddressArray(req);
@@ -65,6 +66,7 @@ const saveURLDataInDB = async (req, fullURL) => {
         urlID,
         isLoggingEnabled,
         expiryDate,
+        isExpiryDateGiven,
         hitsCount: 0,
         userIdentity: userIPAddressArr,
     });
@@ -72,4 +74,4 @@ const saveURLDataInDB = async (req, fullURL) => {
     return newEntry;
 }
 
-module.exports = shortUrlRoute;
+module.exports = generateShortURLRoute;

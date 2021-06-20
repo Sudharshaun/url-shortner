@@ -1,14 +1,19 @@
 import '../index.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { formatDateUtil, getDifferenceBetweenDates } from '../utils/utils';
 
 export default function TableComponent(props) {
-    const tableSource = props.tableData;
-    const constructBody = () => {
-        return tableSource.map((currData, index) => {
-          const expiryDate = formatDateUtil(new Date(currData.expiryDate), "-");
-          const daysTillExpiry = getDifferenceBetweenDates(new Date(), new Date(currData.expiryDate)) + " days";
-          const isURLExpired = daysTillExpiry > 0
+  
+    const constructBody = (data) => {
+        return data.map((currData, index) => {
+          let expiryDate = "-";
+          let daysTillExpiry = "-";
+          let isURLExpired = "-";
+          if (currData.isExpiryDateGiven) {
+            expiryDate = formatDateUtil(new Date(currData.expiryDate), "-");
+            daysTillExpiry = getDifferenceBetweenDates(new Date(), new Date(currData.expiryDate)) + " days";
+          }
+          isURLExpired = daysTillExpiry > 0
           const spanClass = isURLExpired ? "Expired" : "Active";
             return (
               <tr key={index}>
@@ -19,7 +24,7 @@ export default function TableComponent(props) {
                 <td>
                   <span className={spanClass.toLocaleLowerCase()}>{spanClass}</span>
                 </td>
-                <td>{currData.hitsCount}</td>
+                <td>{currData.isLoggingEnabled ? currData.hitsCount : "-"}</td>
               </tr>
             );
         })
@@ -37,7 +42,7 @@ export default function TableComponent(props) {
           </tr>
         </thead>
         <tbody>
-        {constructBody()}
+        {constructBody(props.tableData)}
         </tbody>
       </table>
     );
