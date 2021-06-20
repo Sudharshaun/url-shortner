@@ -11,7 +11,7 @@ The application is built on MERN stack. [Node.js](https://nodejs.org/en/), [Expr
 
 This is a simple full stack [React](https://reactjs.org/) application with a [Node.js](https://nodejs.org/en/) and [Express](https://expressjs.com/) backend. Client side code is written in React and the backend API is written using Express. This application is configured with [Airbnb's ESLint rules](https://github.com/airbnb/javascript) and formatted through [prettier](https://prettier.io/).
 
-### Prequistes
+### Prerequisite
 
 * NodeJS (12.0+)
 * ExpressJS
