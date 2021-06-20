@@ -5,7 +5,12 @@ body{
   background:#FAF3EC;
   font-family: 'Poppins', sans-serif;
 }
-
+.container {
+  top: 37%;
+  position: absolute;
+  left: 5%;
+  right: 5%;
+}
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: #748194;
 }
@@ -57,16 +62,18 @@ body{
 }
 /*Resize the wrap to see the search bar change!*/
 .wrap{
-  width: 70%;
-  position: absolute;
-  top: 20%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 90%;
+  display: flex;
+  align-content: flex-start;
+  justify-content: space-evenly;
+  margin-left: 30px;
+  flex-wrap: nowrap;
+  align-items: baseline;
 }
 
 .date{
   height: 40px;
-  width: 16%;
+  width: 21%;
 }
 
 table {
@@ -104,4 +111,19 @@ tr:last-child td:first-child {
 }
 tr:last-child td:last-child {
   border-bottom-right-radius: 6px;
+}
+
+.count-hits{
+  width: 10%;
+  margin-top: 14px;
+}
+.checkbox {
+  margin-top: 20px;
+  margin-right: 20px;
+}
+.active{
+  color:green;
+}
+.expired {
+  color: red;
 }

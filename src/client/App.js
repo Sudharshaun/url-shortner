@@ -35,7 +35,7 @@ export default function App() {
   console.log(allURLData);
   return (
     <React.StrictMode>
-      <div className="grid">
+      <div className="container">
         <InputHeader addURL={shortenURL} />
         {allURLData.length > 0 ? <TableComponent tableData={allURLData} /> : ""}
       </div>

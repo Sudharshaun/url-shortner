@@ -14,13 +14,11 @@ export default function InputHeader(props) {
     }
     return (
         <div className="wrap">
-            <div className="flex">
-                <input name="enter-url" value={urlString} type="text" onChange={ (event) => setUrlString(event.target.value)} placeholder="Enter URL to be shortened" className="username"/>
-                <label htmlFor="isLoggingEnabled">Count hits</label>
-                <input type="checkbox" checked={isHitCountEnabled} id="isLoggingEnabled" onChange={(event) => setisHitCountEnabled(event.target.checked)}></input>
-                <input type="date" value={expiryDate} className="date" onChange={(event) => setexpiryDate(event.target.value)}></input>
-                <button type="submit" className="btn" onClick={handleSubmit}>Submit</button>
-            </div>
+            <input name="enter-url" value={urlString} type="text" onChange={ (event) => setUrlString(event.target.value)} placeholder="Enter URL to be shortened" className="username"/>
+            <label htmlFor="isLoggingEnabled" className="count-hits">Count hits</label>
+            <input type="checkbox" className="checkbox" checked={isHitCountEnabled} id="isLoggingEnabled" onChange={(event) => setisHitCountEnabled(event.target.checked)}></input>
+            <input type="date" value={expiryDate} className="date" onChange={(event) => setexpiryDate(event.target.value)}></input>
+            <button type="submit" className="btn" onClick={handleSubmit}>Submit</button>
         </div>
     )
 }
