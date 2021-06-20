@@ -9,8 +9,9 @@ const validateAndRedirectURL = async (req, res) => {
     try {
         if (url) {
             await updateValuesInDB(url, req);
+            console.log(getDifferenceBetweenDates(new Date(), url.expiryDate));
             const isURLExpired = getDifferenceBetweenDates(new Date(), url.expiryDate) > 0 ? false : true;
-            isURLExpired ? res.redirect(url.fullURL) : res.status(500).json(statuses.URL_EXPIRED);
+            !isURLExpired ? res.redirect(url.fullURL) : res.status(500).json(statuses.URL_EXPIRED);
         } else {
             return res.status(400).json(statuses.URL_DOESNT_EXIST);
         }
