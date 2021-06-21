@@ -17,9 +17,8 @@ export default function App() {
         isExpiryDateGiven: isExpiryDateGiven,
       }
     }).then( (response) => {
-      const presentData = allURLData;
-      presentData.push(response.data);
-      setallURLData(presentData);
+      const updatedData = [...allURLData, response.data];
+      setallURLData(updatedData);
     }).catch( (error) => {
       console.error(error);
     })

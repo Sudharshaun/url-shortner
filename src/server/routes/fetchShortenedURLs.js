@@ -5,7 +5,6 @@ const fetchAllURLsRegistered = express.Router();
 fetchAllURLsRegistered.get('/', async (req, res) => {
     try{
         const serverData = await Url.find({});
-        console.log(serverData);
         return res.status(201).json(serverData);
     } catch(error) {
         return res.status(500).json(error);
