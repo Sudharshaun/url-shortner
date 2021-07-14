@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const uri = 'mongodb+srv://shaun:shaun@cluster0.nm0nh.mongodb.net/urlshortner?retryWrites=true&w=majority';
+const uri = '';
 const connectDB = () => {
     mongoose.connect(uri, {
         useNewUrlParser: true,
